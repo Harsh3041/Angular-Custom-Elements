@@ -1,0 +1,190 @@
+<link rel="stylesheet" type="text/css" href="custom.css">
+
+
+<script type="module">
+
+
+    //Array which contains data of the table
+    let arr = [
+        {"id":"1","name":"Harsh"},
+        {"id":"2","name":"Bob"},
+        {"id":"3","name":"Mark"},
+        {"id":"4","name":"Kevin"},
+        {"id":"5","name":"Ben"},
+    ]; 
+
+    //Class representing h1 element
+    class MyShadierElement extends HTMLElement {
+      
+      constructor() { 
+        super();
+        this.attachShadow({mode: 'open'});   
+        this.shadowRoot.innerHTML = `
+          <h1>
+            <slot></slot> 
+          </h1>
+        `;
+      }
+    }
+
+    //Class representing h2 element
+    class MysecondHeading extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML = `
+            <h2><slot></slot></h2>
+            `
+        }
+    }
+
+    //Class representing p element
+    class myParaElement extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});  
+            this.shadowRoot.innerHTML = `
+            <p>
+                <slot></slot>
+                </p>
+            `
+        }
+    }
+    
+
+
+    //Class representing table element
+    class myTableElement extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML = `
+            <table><slot></slot></table>
+            `
+        }
+
+    }
+
+
+    //Class representing tr tag
+    class myRowElement extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML = `
+            <tr><slot></slot></tr>
+            `
+        }
+    }
+
+
+    //Class representing th tag
+    class myHeadElement extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML = `
+            <th><slot></slot></th>
+            `
+        }
+    }
+
+
+    //Class representing ul tag
+    class myunolist extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML = `
+            <ul><slot></slot></ul>
+            `
+        }
+    }
+
+
+    //Class representing li tag
+    class mylist extends HTMLElement{
+        constructor(){
+            super();
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.innerHTML =`
+            <li><slot></slot></li>
+            `
+        }
+    }
+
+
+
+    //Classes are defined as CustomElements with custom selectors 
+    customElements.define('my-shadier-element', MyShadierElement);
+    customElements.define('my-second-heading', MysecondHeading);
+    customElements.define('my-para-element', myParaElement);
+    customElements.define('my-table-element',myTableElement);
+    customElements.define('my-trow',myRowElement);
+    customElements.define('my-thead',myHeadElement);
+    customElements.define('my-uno-list',myunolist);
+    customElements.define('my-list',mylist);
+
+    // Variable that is used to send data of Array into Custom Table Tags
+    const dataElement = document.querySelector('.data');
+
+
+    //Mapping through the array of objects and displaying the data from array inside the table
+    arr.map(item => {
+        dataElement.insertAdjacentHTML('beforebegin',`
+        <my-table-element>
+        <my-trow>
+             <my-thead><slot>${item.id} ${item.name}</slot></my-thead>    
+        </my-trow>
+        </my-table-element>
+        `
+        )
+    })
+
+    </script>  
+
+   
+
+    <!--Custom Tags used in HTML-->
+    <my-shadier-element>
+      <pre>&lt;h1&gt;</pre>
+      Hi, this is Harsh using CUSTOM H1 Tag
+    </my-shadier-element>
+
+    <my-second-heading>
+        <pre>&lt;h2&gt;</pre>
+        Hi, this is Harsh using CUSTOM H2 Tag
+     </my-second-heading>
+
+
+
+    <my-para-element>
+        <pre>&lt;p&gt;</pre>
+        Hi, this is Harsh using CUSTOM P Tag
+
+    </my-para-element>
+
+
+
+     <div class=" data">
+     </div>
+
+    
+
+
+     <my-shadier-element>LIST</my-shadier-element>
+
+     <my-uno-list>
+        <my-list>Apple</my-list>
+        <my-list>Samsung</my-list>
+        <my-list>Vivo</my-list>
+        <my-list>Oppo</my-list>
+     </my-uno-list>
+
+
+    
+    
+      
+
+    
+    
